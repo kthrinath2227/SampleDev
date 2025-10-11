@@ -3,13 +3,14 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "homepage": "https://github.com/kthrinath2227/react-button.git",
+  "homepage": "https://kthrinath2227.github.io/react-button",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+  "deploy": "gh-pages -d dist --dotfiles --no-history"
+
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.3.1",
