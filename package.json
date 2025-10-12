@@ -1,9 +1,8 @@
 {
-  "name": "TheDevsTechnologies",
+  "name": "SampleDev",
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "homepage": "https://kthrinath2227.github.io/react-button",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
