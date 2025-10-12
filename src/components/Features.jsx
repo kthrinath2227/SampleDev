@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Zap, ShieldCheck, Layers, Users, BarChart, GitBranch } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
-import { useEffect } from 'react';
 
 const features = [
   {
@@ -39,6 +38,7 @@ const features = [
 
 const Features = ({ setActiveSection }) => {
   const { ref, inView } = useInView({ threshold: 0.3 });
+
   useEffect(() => {
     if (inView) setActiveSection('features');
   }, [inView, setActiveSection]);
@@ -46,8 +46,9 @@ const Features = ({ setActiveSection }) => {
   const isMobile = () => window.innerWidth < 768;
 
   return (
-    <section id="features" ref={ref} className="py-24 px-4 bg-white">
+    <section id="features" ref={ref} className="py-24 px-4 bg-white relative">
       <div className="container mx-auto max-w-7xl">
+        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -63,11 +64,27 @@ const Features = ({ setActiveSection }) => {
           </p>
         </motion.div>
 
+        {/* Timeline */}
         <div className="relative">
+          {/* Center Line */}
           <div className="absolute left-1/2 top-0 h-full w-0.5 bg-blue-200 -translate-x-1/2 hidden md:block"></div>
-          
+
+          {/* Circles on the line */}
+          <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 h-full flex-col items-center">
+            {features.map((_, index) => (
+              <div key={index} className="w-12 h-12 rounded-full bg-blue-500 shadow-md flex items-center justify-center my-16">
+                <div className="w-4 h-4 bg-white rounded-full"></div>
+              </div>
+            ))}
+          </div>
+
+          {/* Feature items */}
           {features.map((feature, index) => (
-            <div key={index} className="flex md:items-center w-full my-8 md:my-0 flex-col md:flex-row">
+            <div
+              key={index}
+              className={`flex md:items-center w-full my-8 md:my-0 flex-col md:flex-row`}
+            >
+              {/* Feature Content */}
               <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-8 md:text-right' : 'md:pl-8 md:text-left md:order-2'}`}>
                 <motion.div
                   initial={{ opacity: 0, x: isMobile() ? 0 : (index % 2 === 0 ? -50 : 50), y: isMobile() ? 20 : 0 }}
@@ -77,7 +94,9 @@ const Features = ({ setActiveSection }) => {
                   className="bg-card p-6 rounded-2xl shadow-lg border hover:shadow-blue-500/20 transition-shadow mb-8 md:mb-16"
                 >
                   <div className={`flex items-center gap-4 ${index % 2 === 0 ? 'md:justify-end flex-row-reverse md:flex-row' : 'justify-start'}`}>
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-400 text-white flex items-center justify-center rounded-xl flex-shrink-0"><feature.icon /></div>
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-400 text-white flex items-center justify-center rounded-xl flex-shrink-0">
+                      <feature.icon />
+                    </div>
                     <div>
                       <h3 className="text-xl font-bold text-foreground">{feature.title}</h3>
                       <p className="text-muted-foreground mt-1">{feature.description}</p>
@@ -85,9 +104,8 @@ const Features = ({ setActiveSection }) => {
                   </div>
                 </motion.div>
               </div>
-              <div className="md:w-12 md:h-12 rounded-full bg-blue-500 shadow-md flex items-center justify-center z-10 flex-shrink-0 md:order-1 hidden md:flex">
-                <div className="w-4 h-4 bg-white rounded-full"></div>
-              </div>
+
+              {/* Empty space to align with center line */}
               <div className="md:w-1/2 md:order-1 hidden md:block"></div>
             </div>
           ))}
