@@ -202,7 +202,7 @@ logger.error = (msg, options) => {
 }
 
 export default defineConfig({
-	 base: "/SampleDev/",
+	 base: "/",
 	customLogger: logger,
 	plugins: [
 		...(isDev ? [inlineEditPlugin(), editModeDevPlugin(), iframeRouteRestorationPlugin()] : []),
