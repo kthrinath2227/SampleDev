@@ -7,9 +7,9 @@ import { Button } from '@/components/ui/button';
 const navLinks = [
   { name: 'Home', href: '#hero' },
   { name: 'Services', href: '#services' },
-  { name: 'Features', href: '#features' },
-  { name: 'Projects', href: '#projects' },
   { name: 'Process', href: '#process' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Features', href: '#features' },
   { name: 'Testimonials', href: '#testimonials' },
   { name: 'Contact', href: '#contact' },
 ];
@@ -38,17 +38,25 @@ const Header = ({ activeSection, onQuoteClick }) => {
       >
         <div className="container mx-auto max-w-7xl px-4 flex justify-between items-center">
           <a href="#" className="flex items-center gap-3">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
-            >
-              <Globe className="w-8 h-8 text-blue-600" />
-            </motion.div>
-            <div>
-              <p className="text-xl font-bold text-foreground">TheDevsTechnologies</p>
-              <p className="text-xs gradient-text font-semibold">Building Tech That Builds Your Business.</p>
-            </div>
-          </a>
+  {/* Globe Icon */}
+  <img
+    src="https://res.cloudinary.com/dtqsqnq4y/image/upload/v1761387612/globe-bg_1_hntiel.png"
+    alt="TheDevsTechnologies Logo"
+    className="w-10 h-10 object-contain"
+  />
+
+  {/* Vertical Line */}
+  <div className="w-[2px] h-8 bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"></div>
+
+  {/* Text Section */}
+  <div className="flex flex-col leading-tight">
+    <p className="text-xl font-bold text-foreground">TheDevsTechnologies</p>
+    <p className="text-xs gradient-text font-semibold">
+      Building Tech That Builds Your Business.
+    </p>
+  </div>
+</a>
+
 
           <nav className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (

@@ -21,7 +21,11 @@ const Footer = () => {
             transition={{ duration: 0.5 }}
           >
             <div className="flex items-center gap-2 mb-4">
-              <Globe className="w-8 h-8 text-blue-600" />
+               <img
+    src="https://res.cloudinary.com/dtqsqnq4y/image/upload/v1761387612/globe-bg_1_hntiel.png"
+    alt="TheDevsTechnologies Logo"
+    className="w-10 h-10 object-contain"
+  />
               <h3 className="text-2xl font-bold gradient-text">TheDevsTechnologies</h3>
             </div>
             <p className="text-muted-foreground mb-6 leading-relaxed">

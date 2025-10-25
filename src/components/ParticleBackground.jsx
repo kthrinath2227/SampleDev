@@ -16,11 +16,11 @@ const ParticleBackground = () => {
     canvas.height = parent.clientHeight;
 
     let particles = [];
-    const particleCount = 50;
+    const particleCount = 100;
     const mouse = {
       x: null,
       y: null,
-      radius: 120,
+      radius: 40,
     };
 
     const handleMouseMove = (event) => {

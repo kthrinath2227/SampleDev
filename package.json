@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
- "homepage": "https://thedevstechnologies.online/",
+  "homepage": "https://thedevstechnologies.online/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -30,6 +30,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
+    "react-helmet-async": "^2.0.5",
     "react-intersection-observer": "^9.10.3",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7"

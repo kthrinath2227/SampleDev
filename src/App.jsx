@@ -68,9 +68,9 @@ function App() {
         <main>
           <Hero setActiveSection={setActiveSection} />
           <Services setActiveSection={setActiveSection} />
-          <Features setActiveSection={setActiveSection} />
-          <Projects setActiveSection={setActiveSection} />
           <Process setActiveSection={setActiveSection} />
+          <Projects setActiveSection={setActiveSection} />
+          <Features setActiveSection={setActiveSection} />
           <Testimonials setActiveSection={setActiveSection} />
           <Contact setActiveSection={setActiveSection} />
         </main>
