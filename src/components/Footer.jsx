@@ -113,6 +113,9 @@ const Footer = () => {
             <p className="text-muted-foreground text-sm text-center md:text-left">
               © {currentYear} TheDevsTechnologies. All rights reserved.
             </p>
+            <p className="text-muted-foreground text-xs mt-1">
+    TheDevsTechnologies is a registered MSME under Udyam Registration No. <strong>UDYAM-AP-06-0106280</strong>.
+  </p>
             <div className="flex gap-6 text-sm">
               <span className="text-muted-foreground hover:text-blue-600 transition-colors cursor-pointer">
                 Privacy Policy

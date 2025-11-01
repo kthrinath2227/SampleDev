@@ -78,7 +78,15 @@ const Hero = ({ setActiveSection }) => {
               >
                 Explore Our Projects
               </Button>
+              
             </div>
+            <div className="flex justify-center lg:justify-start mt-4">
+  <img
+    src="https://res.cloudinary.com/dzwxkhkvi/image/upload/v1762013371/ChatGPT_Image_Nov_1__2025__09_22_29_PM-removebg-preview_tfoxqh.png"
+    alt="MSME Registered"
+    className="h-20  opacity-90 hover:opacity-100 transition"
+  />
+</div>
           </motion.div>
 
           {/* RIGHT SECTION - Trusted Clients */}
