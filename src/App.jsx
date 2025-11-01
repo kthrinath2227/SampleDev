@@ -46,7 +46,7 @@ function App() {
         <html lang="en" />
         <title>TheDevsTechnologies - Web Development | Building Tech That Builds Your Business</title>
         <meta name="description" content="TheDevsTechnologies delivers cutting-edge web development, mobile apps, and digital solutions. Building Tech That Builds Your Business. Contact us at 9381187905." />
-        <meta name="keywords" content="web development, mobile app development, digital solutions, software development, TheDevsTechnologies, custom websites, ecommerce development, tech solutions, building business tech" />
+        <meta name="keywords" content="TheDevsTechnologies, web development company, best website design company, custom website developers, web design agency in Vijayawada, website development in Vizag, website design in Visakhapatnam, web developers in Guntur, website designers in Tenali, web development company in Bapatla, affordable website design in Andhra Pradesh, ecommerce website development, mobile app development, SEO and digital marketing, professional web design company, small business websites, startup website packages, local web developers near me, modern responsive website design, custom website solutions, website redesign experts, online store developers, branding and logo design, business website creators, portfolio website design, WordPress website experts, ReactJS and Node.js developers, hosting and domain setup, website maintenance and support, best web development agency in South India, creative UI UX design services, web app development, digital business solutions, best website developers in Vijayawada, top website design company in Vizag, affordable website design in Guntur, web developers near Tenali, website creators in Bapatla" />
         <meta name="author" content="TheDevsTechnologies" />
         <meta property="og:title" content="TheDevsTechnologies - Web Development | Building Tech That Builds Your Business" />
         <meta property="og:description" content="Transform your business with cutting-edge web development and digital solutions from TheDevsTechnologies. Building Tech That Builds Your Business." />
@@ -61,6 +61,16 @@ function App() {
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
+        <meta name="theme-color" content="#ffffff" />
+        <meta name="application-name" content="TheDevsTechnologies" />
+        <meta name="geo.region" content="IN-AP" />
+        <meta name="geo.placename" content="Vijayawada" />
+        <meta name="geo.position" content="16.5062;80.6480" />
+        <meta name="ICBM" content="16.5062, 80.6480" />
+        <meta name="rating" content="General" />
+        <link rel="alternate" href="https://www.thedevstechnologies.online" hreflang="en-in" />
+        <link rel="alternate" href="https://www.thedevstechnologies.online" hreflang="x-default" />
+
       </Helmet>
 
       <div className="min-h-screen overflow-x-hidden">
