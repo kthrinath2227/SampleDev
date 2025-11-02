@@ -14,6 +14,7 @@ const navLinks = [
   { name: 'Contact', href: '#contact' },
 ];
 
+
 const Header = ({ activeSection, onQuoteClick }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
