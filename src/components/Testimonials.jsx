@@ -1,9 +1,7 @@
-
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Star, Quote } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
-import { useEffect } from 'react';
 
 const testimonials = [
   {
@@ -11,32 +9,54 @@ const testimonials = [
     company: 'Co Founder , HomeShowCase',
     text: 'TheDevsTechnologies transformed our online presence. Their team is professional, creative, and delivered beyond our expectations. Highly recommended!',
     rating: 4,
-    avatarName: 'A professional woman with glasses smiling'
   },
   {
     name: 'Vinod K.',
     company: 'Founder, DLuxurio',
     text: 'Working with them was a breeze. They understood our vision perfectly and developed a mobile app that our users love. The entire process was seamless.',
     rating: 5,
-    avatarName: 'A man in a suit looking confident'
   },
   {
     name: 'Preetham.',
     company: 'Founder. VijaySri Enterprise',
     text: 'Their design team is top-notch. They created a stunning UI/UX for our new platform that has significantly improved user engagement.',
     rating: 5,
-    avatarName: 'A young creative professional with a friendly expression'
   },
 ];
 
 const Testimonials = ({ setActiveSection }) => {
   const { ref, inView } = useInView({ threshold: 0.3 });
+
   useEffect(() => {
     if (inView) setActiveSection('testimonials');
   }, [inView, setActiveSection]);
 
   return (
-    <section id="testimonials" ref={ref} className="py-24 px-4 bg-secondary">
+    <section
+      id="testimonials"
+      ref={ref}
+      className="py-24 px-4 bg-secondary"
+      role="region"
+      aria-labelledby="testimonials-heading"
+      itemScope
+      itemType="https://schema.org/ItemList"
+    >
+      {/* SEO context for crawlers + screen readers */}
+      <meta
+        itemProp="name"
+        content="Client reviews and testimonials for TheDevsTechnologies"
+      />
+      <meta
+        itemProp="description"
+        content="Read real client reviews for TheDevsTechnologies, a website design and development company in Vijayawada, Andhra Pradesh, delivering high-quality websites, apps and UI UX design."
+      />
+      <p className="sr-only">
+        Genuine testimonials and reviews from clients who worked with
+        TheDevsTechnologies for website development, ecommerce platforms,
+        mobile app development and UI UX design in Vijayawada and across
+        Andhra Pradesh.
+      </p>
+
       <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -45,11 +65,15 @@ const Testimonials = ({ setActiveSection }) => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+          <h2
+            id="testimonials-heading"
+            className="text-4xl md:text-6xl font-bold mb-6"
+          >
             What Our <span className="gradient-text">Clients Say</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            We are dedicated to client satisfaction. See what our partners have to say about their experience with us.
+            We are dedicated to client satisfaction. See what our partners have
+            to say about their experience with us.
           </p>
         </motion.div>
 
@@ -62,19 +86,52 @@ const Testimonials = ({ setActiveSection }) => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
               className="bg-card rounded-2xl p-8 shadow-lg flex flex-col h-full border"
+              aria-label={`Testimonial from ${testimonial.name}, ${testimonial.company}`}
+              itemProp="itemListElement"
+              itemScope
+              itemType="https://schema.org/Review"
             >
-              <Quote className="w-12 h-12 text-blue-200 mb-4" />
-              <p className="text-muted-foreground mb-6 flex-grow">
+              {/* Link each review to your business (for Google understanding) */}
+              <meta
+                itemProp="itemReviewed"
+                content="TheDevsTechnologies - Website Design & Development Company in Vijayawada"
+              />
+              <meta itemProp="name" content={`Review by ${testimonial.name}`} />
+
+              <Quote className="w-12 h-12 text-blue-200 mb-4" aria-hidden="true" />
+
+              <p className="text-muted-foreground mb-6 flex-grow" itemProp="reviewBody">
                 "{testimonial.text}"
               </p>
+
               <div className="flex items-center mt-auto">
-                
                 <div>
-                  <h4 className="font-bold text-lg text-card-foreground">{testimonial.name}</h4>
-                  <p className="text-sm text-muted-foreground">{testimonial.company}</p>
-                  <div className="flex mt-1">
+                  <p
+                    className="font-bold text-lg text-card-foreground"
+                    itemProp="author"
+                    itemScope
+                    itemType="https://schema.org/Person"
+                  >
+                    <span itemProp="name">{testimonial.name}</span>
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {testimonial.company}
+                  </p>
+
+                  <div
+                    className="flex mt-1"
+                    itemProp="reviewRating"
+                    itemScope
+                    itemType="https://schema.org/Rating"
+                  >
+                    <meta itemProp="ratingValue" content={String(testimonial.rating)} />
+                    <meta itemProp="bestRating" content="5" />
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                      <Star
+                        key={i}
+                        className="w-4 h-4 text-yellow-400 fill-current"
+                        aria-hidden="true"
+                      />
                     ))}
                   </div>
                 </div>

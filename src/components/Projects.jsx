@@ -56,24 +56,7 @@ const Projects = ({ setActiveSection }) => {
   const [showAll, setShowAll] = useState(false);
   const { toast } = useToast();
 
-  // 🧠 Basic SEO (Helmet-free)
-  useEffect(() => {
-    document.title =
-      "Our Projects | The Devs Technologies - Web & App Development";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    const metaKeywords = document.querySelector('meta[name="keywords"]');
-
-    if (metaDesc)
-      metaDesc.setAttribute(
-        "content",
-        "Explore our featured projects at The Devs Technologies — high-performance websites, mobile apps, and digital experiences crafted for excellence."
-      );
-    if (metaKeywords)
-      metaKeywords.setAttribute(
-        "content",
-        "web development, React, digital marketing, mobile app development, website design, The Devs Technologies, Vijayawada"
-      );
-  }, []);
+  // ❌ Removed meta-tag overriding here so App Helmet stays the source of truth
 
   useEffect(() => {
     if (inView) setActiveSection("projects");
@@ -85,7 +68,25 @@ const Projects = ({ setActiveSection }) => {
       ref={ref}
       className="py-24 px-4 bg-secondary"
       aria-labelledby="projects-heading"
+      role="region"
+      itemScope
+      itemType="https://schema.org/ItemList"
     >
+      {/* Local SEO + context for crawlers and screen readers */}
+      <meta
+        itemProp="name"
+        content="Web design and development projects by TheDevsTechnologies"
+      />
+      <meta
+        itemProp="description"
+        content="A curated list of website development, ecommerce and portfolio projects built by TheDevsTechnologies for clients in Vijayawada, Andhra Pradesh and across India."
+      />
+      <p className="sr-only">
+        Explore live website development, ecommerce and portfolio projects
+        designed and developed by TheDevsTechnologies, a web development company
+        based in Vijayawada, Andhra Pradesh, serving clients across India.
+      </p>
+
       <div className="container mx-auto max-w-7xl">
         {/* Heading */}
         <motion.header
@@ -118,12 +119,22 @@ const Projects = ({ setActiveSection }) => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 group border flex flex-col"
               aria-label={`Project: ${project.title}`}
+              itemProp="itemListElement"
+              itemScope
+              itemType="https://schema.org/CreativeWork"
             >
+              <meta itemProp="name" content={project.title} />
+              <meta itemProp="about" content={project.category} />
+              <meta itemProp="description" content={project.description} />
+              <meta itemProp="url" content={project.link} />
+
               <div className="relative overflow-hidden flex-grow">
                 <img
                   src={project.imageSrc}
-                  alt={project.description}
+                  alt={`${project.title} – ${project.description}`}
                   loading="lazy"
+                  decoding="async"
+                  itemProp="image"
                   className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
@@ -170,6 +181,9 @@ const Projects = ({ setActiveSection }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              aria-modal="true"
+              role="dialog"
+              aria-label="All web design and development projects"
             >
               <motion.div
                 className="bg-white dark:bg-gray-900 rounded-3xl p-6 max-w-6xl w-full relative overflow-y-auto max-h-[90vh]"
@@ -195,12 +209,23 @@ const Projects = ({ setActiveSection }) => {
                       key={index}
                       className="bg-card rounded-2xl overflow-hidden border shadow-md hover:shadow-lg transition-all duration-300 flex flex-col"
                       aria-label={`Project: ${project.title}`}
+                      itemScope
+                      itemType="https://schema.org/CreativeWork"
                     >
+                      <meta itemProp="name" content={project.title} />
+                      <meta
+                        itemProp="description"
+                        content={project.description}
+                      />
+                      <meta itemProp="url" content={project.link} />
+
                       <div className="relative overflow-hidden flex-grow">
                         <img
                           src={project.imageSrc}
-                          alt={project.description}
+                          alt={`${project.title} – ${project.description}`}
                           loading="lazy"
+                          decoding="async"
+                          itemProp="image"
                           className="w-full h-56 object-cover hover:scale-105 transition-transform duration-500"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>

@@ -27,12 +27,15 @@ const Hero = ({ setActiveSection }) => {
     <section
       id="hero"
       ref={ref}
+      role="region"
+      aria-label="Professional Web Design, Web Development, and Digital Solutions"
       className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden px-6 sm:px-8 pt-24 sm:pt-28 pb-20"
     >
       <ParticleBackground />
 
       <div className="container mx-auto max-w-7xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
           {/* LEFT SECTION */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -40,30 +43,56 @@ const Hero = ({ setActiveSection }) => {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="space-y-6 text-center lg:text-left"
           >
+            {/* TOP BADGE */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-effect mx-auto lg:mx-0"
+              aria-label="Top Rated Digital Solutions Badge"
             >
               <Sparkles className="w-4 h-4 text-blue-500" />
-              <span className="text-sm font-medium text-blue-600">Innovative Digital Solutions</span>
+              <span className="text-sm font-medium text-blue-600">
+                Innovative Digital Solutions
+              </span>
             </motion.div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-foreground break-words">
+            {/* MAIN TITLE (unchanged text) */}
+            <h1
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-foreground break-words"
+              itemProp="headline"
+            >
               Transform Your
               <span className="gradient-text block mt-2">Digital Vision</span>
               Into Reality
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              We craft exceptional web experiences that drive growth and innovation. From stunning websites to powerful applications, we bring your ideas to life with cutting-edge technology.
+            {/* ORIGINAL DESCRIPTION (unchanged text) */}
+            <p
+              className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0"
+              itemProp="description"
+            >
+              We craft exceptional web experiences that drive growth and innovation.
+              From stunning websites to powerful applications, we bring your ideas to life
+              with cutting-edge technology.
             </p>
 
+            {/* EXTRA LOCAL-SEO DESCRIPTION (added, but doesn’t change your original text) */}
+            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto lg:mx-0">
+              Based in <strong>Vijayawada, Andhra Pradesh</strong>, TheDevsTechnologies
+              specializes in <strong>website design</strong>, <strong>web development</strong>,
+              <strong> ecommerce website development</strong>, and <strong>local SEO services</strong>
+              for businesses in <strong>Vijayawada</strong>, <strong>Guntur</strong>,
+              <strong> Amaravati</strong>, and across <strong>Andhra Pradesh</strong>.
+              We help local brands get more enquiries, calls, and customers from Google.
+            </p>
+
+            {/* CTA BUTTONS (unchanged) */}
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
               <Button
                 onClick={scrollToContact}
                 size="lg"
+                aria-label="Start Your Web Project with Professional Designers"
                 className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-8 py-5 text-base sm:text-lg rounded-xl shadow-lg shadow-blue-500/40 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
               >
                 Start Your Project
@@ -73,30 +102,39 @@ const Hero = ({ setActiveSection }) => {
               <Button
                 variant="outline"
                 size="lg"
+                aria-label="Explore Completed Projects and Portfolio"
                 className="bg-white/80 hover:bg-white border-2 border-blue-200/50 hover:border-blue-500 text-foreground px-8 py-5 text-base sm:text-lg rounded-xl transition-all w-full sm:w-auto"
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() =>
+                  document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
+                }
               >
                 Explore Our Projects
               </Button>
-              
             </div>
+
+            {/* MSME BADGE */}
             <div className="flex justify-center lg:justify-start mt-4">
-  <img
-    src="https://res.cloudinary.com/dzwxkhkvi/image/upload/v1762013371/ChatGPT_Image_Nov_1__2025__09_22_29_PM-removebg-preview_tfoxqh.png"
-    alt="MSME Registered"
-    className="h-20  opacity-90 hover:opacity-100 transition"
-  />
-</div>
+              <img
+                src="https://res.cloudinary.com/dzwxkhkvi/image/upload/v1762013371/ChatGPT_Image_Nov_1__2025__09_22_29_PM-removebg-preview_tfoxqh.png"
+                alt="MSME registered website design company in Vijayawada, Andhra Pradesh"
+                loading="lazy"
+                decoding="async"
+                className="h-20 opacity-90 hover:opacity-100 transition"
+              />
+            </div>
           </motion.div>
 
-          {/* RIGHT SECTION - Trusted Clients */}
+          {/* RIGHT SECTION - CLIENT LOGO MARQUEE */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
             className="relative flex flex-col items-center justify-center space-y-6 mt-12 lg:mt-0"
           >
-            <h3 className="text-base sm:text-lg font-semibold text-center text-muted-foreground uppercase tracking-widest">
+            <h3
+              className="text-base sm:text-lg font-semibold text-center text-muted-foreground uppercase tracking-widest"
+              aria-label="Trusted Web Design Client Brands in Andhra Pradesh"
+            >
               Trusted By Leading Brands
             </h3>
 
@@ -104,17 +142,16 @@ const Hero = ({ setActiveSection }) => {
               <motion.div
                 className="flex gap-10 sm:gap-16 items-center"
                 animate={{ x: ['0%', '-100%'] }}
-                transition={{
-                  duration: 30,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
+                transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+                aria-label="Client Logo Scrolling Slider"
               >
                 {[...clientLogos, ...clientLogos].map((logo, i) => (
                   <motion.img
                     key={i}
                     src={logo}
-                    alt={`Client logo ${i}`}
+                    loading="lazy"
+                    decoding="async"
+                    alt={`Website design client logo ${i + 1} from Andhra Pradesh - TheDevsTechnologies`}
                     className="h-8 sm:h-10 md:h-12 w-auto opacity-60 hover:opacity-100 transition-opacity duration-500"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
