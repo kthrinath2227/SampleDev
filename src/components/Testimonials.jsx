@@ -6,7 +6,7 @@ import { useInView } from 'react-intersection-observer';
 const testimonials = [
   {
     name: 'Murali Krishna.',
-    company: 'Co Founder , HomeShowCase',
+    company: 'Co Founder, HomeShowCase',
     text: 'TheDevsTechnologies transformed our online presence. Their team is professional, creative, and delivered beyond our expectations. Highly recommended!',
     rating: 4,
   },
@@ -18,7 +18,7 @@ const testimonials = [
   },
   {
     name: 'Preetham.',
-    company: 'Founder. VijaySri Enterprise',
+    company: 'Founder, VijaySri Enterprise',
     text: 'Their design team is top-notch. They created a stunning UI/UX for our new platform that has significantly improved user engagement.',
     rating: 5,
   },
@@ -28,8 +28,16 @@ const Testimonials = ({ setActiveSection }) => {
   const { ref, inView } = useInView({ threshold: 0.3 });
 
   useEffect(() => {
-    if (inView) setActiveSection('testimonials');
+    if (inView) {
+      setActiveSection('testimonials');
+    }
   }, [inView, setActiveSection]);
+
+  // ✅ HashRouter-safe helper (future-proof, no UI impact)
+  const navigateToSection = (sectionId) => {
+    window.location.hash = `/${sectionId}`;
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <section
@@ -41,23 +49,25 @@ const Testimonials = ({ setActiveSection }) => {
       itemScope
       itemType="https://schema.org/ItemList"
     >
-      {/* SEO context for crawlers + screen readers */}
+      {/* SEO metadata */}
       <meta
         itemProp="name"
         content="Client reviews and testimonials for TheDevsTechnologies"
       />
       <meta
         itemProp="description"
-        content="Read real client reviews for TheDevsTechnologies, a website design and development company in Vijayawada, Andhra Pradesh, delivering high-quality websites, apps and UI UX design."
+        content="Real client testimonials for TheDevsTechnologies, a website design and development company in Vijayawada, Andhra Pradesh."
       />
+
+      {/* Invisible SEO context */}
       <p className="sr-only">
-        Genuine testimonials and reviews from clients who worked with
-        TheDevsTechnologies for website development, ecommerce platforms,
-        mobile app development and UI UX design in Vijayawada and across
-        Andhra Pradesh.
+        Read genuine client reviews and testimonials for TheDevsTechnologies,
+        a professional website design and development company in Vijayawada,
+        offering web development, ecommerce, mobile apps, and UI UX design services.
       </p>
 
       <div className="container mx-auto max-w-7xl">
+        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -77,6 +87,7 @@ const Testimonials = ({ setActiveSection }) => {
           </p>
         </motion.div>
 
+        {/* Testimonials Grid */}
         <div className="grid lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div
@@ -91,16 +102,25 @@ const Testimonials = ({ setActiveSection }) => {
               itemScope
               itemType="https://schema.org/Review"
             >
-              {/* Link each review to your business (for Google understanding) */}
+              {/* Link each review to your business */}
               <meta
                 itemProp="itemReviewed"
                 content="TheDevsTechnologies - Website Design & Development Company in Vijayawada"
               />
-              <meta itemProp="name" content={`Review by ${testimonial.name}`} />
+              <meta
+                itemProp="name"
+                content={`Review by ${testimonial.name}`}
+              />
 
-              <Quote className="w-12 h-12 text-blue-200 mb-4" aria-hidden="true" />
+              <Quote
+                className="w-12 h-12 text-blue-200 mb-4"
+                aria-hidden="true"
+              />
 
-              <p className="text-muted-foreground mb-6 flex-grow" itemProp="reviewBody">
+              <p
+                className="text-muted-foreground mb-6 flex-grow"
+                itemProp="reviewBody"
+              >
                 "{testimonial.text}"
               </p>
 
@@ -114,6 +134,7 @@ const Testimonials = ({ setActiveSection }) => {
                   >
                     <span itemProp="name">{testimonial.name}</span>
                   </p>
+
                   <p className="text-sm text-muted-foreground">
                     {testimonial.company}
                   </p>
@@ -124,8 +145,12 @@ const Testimonials = ({ setActiveSection }) => {
                     itemScope
                     itemType="https://schema.org/Rating"
                   >
-                    <meta itemProp="ratingValue" content={String(testimonial.rating)} />
+                    <meta
+                      itemProp="ratingValue"
+                      content={String(testimonial.rating)}
+                    />
                     <meta itemProp="bestRating" content="5" />
+
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star
                         key={i}
@@ -140,6 +165,14 @@ const Testimonials = ({ setActiveSection }) => {
           ))}
         </div>
       </div>
+
+      {/* 🔥 Hidden SEO hash links */}
+      <nav className="sr-only">
+        <a href="/#/testimonials">Client Reviews</a>
+        <a href="/#/services">Website Design & Development Services</a>
+        <a href="/#/projects">Web Development Projects</a>
+        <a href="/#/contact">Contact Web Developers in Vijayawada</a>
+      </nav>
     </section>
   );
 };

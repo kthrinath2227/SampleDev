@@ -56,11 +56,17 @@ const Projects = ({ setActiveSection }) => {
   const [showAll, setShowAll] = useState(false);
   const { toast } = useToast();
 
-  // ❌ Removed meta-tag overriding here so App Helmet stays the source of truth
-
   useEffect(() => {
-    if (inView) setActiveSection("projects");
+    if (inView) {
+      setActiveSection("projects");
+    }
   }, [inView, setActiveSection]);
+
+  // ✅ HashRouter-safe helper (no UI impact)
+  const navigateToSection = (sectionId) => {
+    window.location.hash = `/${sectionId}`;
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <section
@@ -72,19 +78,21 @@ const Projects = ({ setActiveSection }) => {
       itemScope
       itemType="https://schema.org/ItemList"
     >
-      {/* Local SEO + context for crawlers and screen readers */}
+      {/* SEO context */}
       <meta
         itemProp="name"
         content="Web design and development projects by TheDevsTechnologies"
       />
       <meta
         itemProp="description"
-        content="A curated list of website development, ecommerce and portfolio projects built by TheDevsTechnologies for clients in Vijayawada, Andhra Pradesh and across India."
+        content="Website development, ecommerce and portfolio projects built by TheDevsTechnologies for businesses in Vijayawada and across India."
       />
+
+      {/* Invisible SEO text */}
       <p className="sr-only">
-        Explore live website development, ecommerce and portfolio projects
-        designed and developed by TheDevsTechnologies, a web development company
-        based in Vijayawada, Andhra Pradesh, serving clients across India.
+        View live website development, ecommerce and portfolio projects created
+        by TheDevsTechnologies, a professional web development company based in
+        Vijayawada, Andhra Pradesh.
       </p>
 
       <div className="container mx-auto max-w-7xl">
@@ -139,6 +147,7 @@ const Projects = ({ setActiveSection }) => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
               </div>
+
               <div className="p-5 flex flex-col justify-between flex-grow">
                 <div>
                   <p className="text-sm font-semibold text-blue-600 mb-1">
@@ -148,6 +157,7 @@ const Projects = ({ setActiveSection }) => {
                     {project.title}
                   </h3>
                 </div>
+
                 <Button
                   onClick={() => window.open(project.link, "_blank")}
                   aria-label={`Visit ${project.title} website`}
@@ -199,6 +209,7 @@ const Projects = ({ setActiveSection }) => {
                 >
                   <X className="w-6 h-6" />
                 </button>
+
                 <h3 className="text-3xl font-bold text-center mb-6">
                   All Projects
                 </h3>
@@ -230,6 +241,7 @@ const Projects = ({ setActiveSection }) => {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                       </div>
+
                       <div className="p-5 flex flex-col justify-between flex-grow">
                         <div>
                           <p className="text-sm font-semibold text-blue-500 mb-1">
@@ -239,6 +251,7 @@ const Projects = ({ setActiveSection }) => {
                             {project.title}
                           </h3>
                         </div>
+
                         <Button
                           onClick={() => window.open(project.link, "_blank")}
                           aria-label={`Visit ${project.title} website`}
@@ -257,6 +270,13 @@ const Projects = ({ setActiveSection }) => {
           )}
         </AnimatePresence>
       </div>
+
+      {/* 🔥 Hidden SEO hash links */}
+      <nav className="sr-only">
+        <a href="/#/projects">Web Development Projects</a>
+        <a href="/#/services">Website Design & Development Services</a>
+        <a href="/#/contact">Contact Web Developers in Vijayawada</a>
+      </nav>
     </section>
   );
 };

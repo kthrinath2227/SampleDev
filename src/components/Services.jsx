@@ -1,45 +1,63 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Code, Smartphone, PenTool, ShoppingCart, BarChart2, Search } from 'lucide-react';
+import {
+  Code,
+  Smartphone,
+  PenTool,
+  BarChart2,
+  Search,
+} from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 
 const services = [
   {
     icon: Search,
     title: 'Search Engine Optimization',
-    description: 'Acquire your place on top of SERP & witness the tangible result! SEO works for any business if you implement it accurately.',
+    description:
+      'Acquire your place on top of SERP & witness the tangible result! SEO works for any business if you implement it accurately.',
   },
   {
     icon: Code,
     title: 'Website Development',
-    description: 'Develop a full-potential website for your business with the trending technologies. Stand out from the crowd and derive more sales.',
+    description:
+      'Develop a full-potential website for your business with the trending technologies. Stand out from the crowd and derive more sales.',
   },
   {
     icon: Smartphone,
     title: 'Mobile App Development',
-    description: 'Building intuitive and engaging native mobile applications for both iOS and Android platforms to reach more users.',
+    description:
+      'Building intuitive and engaging native mobile applications for both iOS and Android platforms to reach more users.',
   },
   {
     icon: BarChart2,
     title: 'Social Media Management',
-    description: 'Effective social management will assist you to grow your business, maintain a social presence, and interact with the right audience.',
+    description:
+      'Effective social management will assist you to grow your business, maintain a social presence, and interact with the right audience.',
   },
   {
     icon: PenTool,
     title: 'UI/UX Design',
-    description: 'Designing beautiful and user-friendly interfaces that provide an exceptional user experience and boost engagement.',
+    description:
+      'Designing beautiful and user-friendly interfaces that provide an exceptional user experience and boost engagement.',
   },
 ];
 
 const Services = ({ setActiveSection }) => {
   const { ref, inView } = useInView({ threshold: 0.3 });
-
-  useEffect(() => {
-    if (inView) setActiveSection('services');
-  }, [inView, setActiveSection]);
-
   const [selected, setSelected] = useState(0);
   const SelectedIcon = services[selected].icon;
+
+  useEffect(() => {
+    if (inView) {
+      setActiveSection('services');
+    }
+  }, [inView, setActiveSection]);
+
+  // ✅ HashRouter-safe helper (future-proof, no UI impact)
+  const navigateToSection = (sectionId) => {
+    window.location.hash = `/${sectionId}`;
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <section
@@ -51,21 +69,24 @@ const Services = ({ setActiveSection }) => {
       itemScope
       itemType="https://schema.org/ItemList"
     >
-      <meta itemProp="name" content="Web design, development and digital services" />
+      <meta
+        itemProp="name"
+        content="Web design, development and digital services"
+      />
       <meta
         itemProp="description"
         content="Professional website development, SEO, mobile app development, social media management and UI UX design services by TheDevsTechnologies for businesses in Vijayawada, Guntur, Amaravati and across Andhra Pradesh."
       />
 
-      {/* Invisible but SEO-friendly & accessibility-friendly local text */}
+      {/* Invisible but SEO-friendly local content */}
       <p className="sr-only">
-        TheDevsTechnologies provides Search Engine Optimization, website development,
-        mobile app development, social media management and UI UX design services
-        for local businesses in Vijayawada, Guntur, Amaravati and throughout Andhra Pradesh,
-        helping them rank higher on Google and grow online.
+        TheDevsTechnologies offers SEO services, website development, mobile app
+        development, social media management and UI UX design for businesses in
+        Vijayawada, Guntur, Amaravati and throughout Andhra Pradesh.
       </p>
 
       <div className="container mx-auto max-w-7xl">
+        {/* SECTION HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -85,6 +106,7 @@ const Services = ({ setActiveSection }) => {
         </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-8 items-center">
+          {/* SELECTED SERVICE */}
           <AnimatePresence mode="wait">
             <motion.div
               key={selected}
@@ -124,10 +146,11 @@ const Services = ({ setActiveSection }) => {
             </motion.div>
           </AnimatePresence>
 
+          {/* SERVICE LIST */}
           <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
             {services.map((service, index) => {
-              const ServiceIcon = service.icon;
               if (index === selected) return null;
+              const ServiceIcon = service.icon;
 
               return (
                 <motion.div
@@ -154,7 +177,10 @@ const Services = ({ setActiveSection }) => {
                       <ServiceIcon className="w-6 h-6" aria-hidden="true" />
                     </div>
                     <div>
-                      <h4 className="text-xl font-bold text-card-foreground" itemProp="name">
+                      <h4
+                        className="text-xl font-bold text-card-foreground"
+                        itemProp="name"
+                      >
                         {service.title}
                       </h4>
                       <p
@@ -171,6 +197,13 @@ const Services = ({ setActiveSection }) => {
           </div>
         </div>
       </div>
+
+      {/* 🔥 Hidden SEO hash links (crawler-friendly, UI-safe) */}
+      <nav className="sr-only">
+        <a href="/#/services">Website Design & Development Services</a>
+        <a href="/#/projects">Web Development Projects</a>
+        <a href="/#/contact">Contact Web Developers in Vijayawada</a>
+      </nav>
     </section>
   );
 };

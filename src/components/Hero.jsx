@@ -19,8 +19,10 @@ const Hero = ({ setActiveSection }) => {
     if (inView) setActiveSection('hero');
   }, [inView, setActiveSection]);
 
-  const scrollToContact = () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  // ✅ HashRouter-safe navigation (SEO friendly)
+  const navigateToSection = (sectionId) => {
+    window.location.hash = `/${sectionId}`;
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -57,7 +59,7 @@ const Hero = ({ setActiveSection }) => {
               </span>
             </motion.div>
 
-            {/* MAIN TITLE (unchanged text) */}
+            {/* MAIN TITLE */}
             <h1
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-foreground break-words"
               itemProp="headline"
@@ -67,7 +69,7 @@ const Hero = ({ setActiveSection }) => {
               Into Reality
             </h1>
 
-            {/* ORIGINAL DESCRIPTION (unchanged text) */}
+            {/* ORIGINAL DESCRIPTION */}
             <p
               className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0"
               itemProp="description"
@@ -77,7 +79,7 @@ const Hero = ({ setActiveSection }) => {
               with cutting-edge technology.
             </p>
 
-            {/* EXTRA LOCAL-SEO DESCRIPTION (added, but doesn’t change your original text) */}
+            {/* LOCAL SEO TEXT */}
             <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto lg:mx-0">
               Based in <strong>Vijayawada, Andhra Pradesh</strong>, TheDevsTechnologies
               specializes in <strong>website design</strong>, <strong>web development</strong>,
@@ -87,10 +89,10 @@ const Hero = ({ setActiveSection }) => {
               We help local brands get more enquiries, calls, and customers from Google.
             </p>
 
-            {/* CTA BUTTONS (unchanged) */}
+            {/* CTA BUTTONS */}
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
               <Button
-                onClick={scrollToContact}
+                onClick={() => navigateToSection('contact')}
                 size="lg"
                 aria-label="Start Your Web Project with Professional Designers"
                 className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-8 py-5 text-base sm:text-lg rounded-xl shadow-lg shadow-blue-500/40 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
@@ -104,9 +106,7 @@ const Hero = ({ setActiveSection }) => {
                 size="lg"
                 aria-label="Explore Completed Projects and Portfolio"
                 className="bg-white/80 hover:bg-white border-2 border-blue-200/50 hover:border-blue-500 text-foreground px-8 py-5 text-base sm:text-lg rounded-xl transition-all w-full sm:w-auto"
-                onClick={() =>
-                  document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
-                }
+                onClick={() => navigateToSection('projects')}
               >
                 Explore Our Projects
               </Button>
@@ -124,7 +124,7 @@ const Hero = ({ setActiveSection }) => {
             </div>
           </motion.div>
 
-          {/* RIGHT SECTION - CLIENT LOGO MARQUEE */}
+          {/* RIGHT SECTION */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}

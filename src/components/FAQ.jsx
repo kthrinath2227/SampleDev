@@ -34,8 +34,16 @@ const FAQ = ({ setActiveSection }) => {
   const { ref, inView } = useInView({ threshold: 0.2 });
 
   useEffect(() => {
-    if (inView && setActiveSection) setActiveSection('faq');
+    if (inView && setActiveSection) {
+      setActiveSection('faq');
+    }
   }, [inView, setActiveSection]);
+
+  // ✅ HashRouter-safe helper (future-proof, no UI impact)
+  const navigateToSection = (sectionId) => {
+    window.location.hash = `/${sectionId}`;
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <section
@@ -43,25 +51,29 @@ const FAQ = ({ setActiveSection }) => {
       ref={ref}
       className="py-20 px-4 bg-secondary"
       aria-labelledby="faq-heading"
+      role="region"
       itemScope
       itemType="https://schema.org/FAQPage"
     >
-      {/* Hidden SEO context */}
+      {/* SEO metadata */}
       <meta
         itemProp="name"
         content="FAQ - Website Design & Development Services in Vijayawada, Andhra Pradesh"
       />
       <meta
         itemProp="description"
-        content="Frequently asked questions about website design, web development, SEO, support and services offered by TheDevsTechnologies for businesses in Vijayawada, Guntur, Amaravati and across Andhra Pradesh."
+        content="Frequently asked questions about website design, web development, SEO, and support services offered by TheDevsTechnologies in Vijayawada and across Andhra Pradesh."
       />
+
+      {/* Invisible SEO context */}
       <p className="sr-only">
         Frequently asked questions about website design, web development, SEO,
-        support and how to get in touch with TheDevsTechnologies, a web agency
-        based in Vijayawada, Andhra Pradesh, India.
+        maintenance, and contacting TheDevsTechnologies, a professional web
+        development company in Vijayawada, Andhra Pradesh.
       </p>
 
       <div className="container mx-auto max-w-5xl">
+        {/* Heading */}
         <motion.h2
           id="faq-heading"
           className="text-4xl md:text-5xl font-bold text-center mb-12"
@@ -73,6 +85,7 @@ const FAQ = ({ setActiveSection }) => {
           Frequently Asked <span className="gradient-text">Questions</span>
         </motion.h2>
 
+        {/* FAQ Items */}
         <div className="space-y-6">
           {faqItems.map((item, index) => (
             <motion.div
@@ -92,6 +105,7 @@ const FAQ = ({ setActiveSection }) => {
               >
                 {item.question}
               </h3>
+
               <div
                 className="text-muted-foreground"
                 itemScope
@@ -104,6 +118,14 @@ const FAQ = ({ setActiveSection }) => {
           ))}
         </div>
       </div>
+
+      {/* 🔥 Hidden SEO hash links */}
+      <nav className="sr-only">
+        <a href="/#/faq">Website Development FAQs</a>
+        <a href="/#/services">Website Design & Development Services</a>
+        <a href="/#/projects">Web Development Projects</a>
+        <a href="/#/contact">Contact Web Developers in Vijayawada</a>
+      </nav>
     </section>
   );
 };

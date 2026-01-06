@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Send, CheckCircle, Zap, Users, Lightbulb } from 'lucide-react';
+import { Mail, Phone, Send, CheckCircle, Zap, Users, Lightbulb, BarChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { useInView } from 'react-intersection-observer';
 
 const Contact = ({ setActiveSection }) => {
   const { ref, inView } = useInView({ threshold: 0.3 });
+
   useEffect(() => {
-    if (inView) setActiveSection('contact');
+    if (inView && setActiveSection) {
+      setActiveSection('contact');
+    }
   }, [inView, setActiveSection]);
 
   const { toast } = useToast();
@@ -21,20 +24,21 @@ const Contact = ({ setActiveSection }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!formData.name || !formData.email || !formData.message) {
       toast({
-        title: "Missing Information",
-        description: "Please fill in all required fields.",
-        variant: "destructive",
+        title: 'Missing Information',
+        description: 'Please fill in all required fields.',
+        variant: 'destructive',
       });
       return;
     }
 
-    const whatsappNumber = "919381187905";
+    const whatsappNumber = '919381187905';
     const prefilledText = `Hello TheDevsTechnologies!
 
-I'm interested in your services. Here are my details:
+I'm interested in your services.
+
 Name: ${formData.name}
 Email: ${formData.email}
 Phone: ${formData.phone || 'Not provided'}
@@ -44,12 +48,11 @@ ${formData.message}
 `;
 
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(prefilledText)}`;
-    
     window.open(whatsappUrl, '_blank');
 
     toast({
-      title: "Redirecting to WhatsApp... 🚀",
-      description: "Your message is ready to be sent!",
+      title: 'Redirecting to WhatsApp 🚀',
+      description: 'Your message is ready to be sent!',
     });
 
     setFormData({ name: '', email: '', phone: '', message: '' });
@@ -58,11 +61,13 @@ ${formData.message}
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  
+
+  // ✅ SEO-optimized (still short & clean)
   const whyChooseUs = [
-    { icon: Zap, text: 'Agile & Fast Delivery' },
-    { icon: Users, text: 'Customer-Centric Approach' },
-    { icon: Lightbulb, text: 'Innovative Solutions' },
+    { icon: Zap, text: 'Fast & Agile Website Delivery (5–10 Days)' },
+    { icon: BarChart, text: 'SEO-Optimized & Google-Friendly Websites' },
+    { icon: Users, text: 'Local Vijayawada Experts with Real Business Focus' },
+    { icon: Lightbulb, text: 'Custom Designs That Generate Leads & Calls' },
   ];
 
   return (
@@ -75,23 +80,26 @@ ${formData.message}
       itemScope
       itemType="https://schema.org/ContactPage"
     >
-      {/* Hidden but SEO + accessibility friendly local context */}
+      {/* SEO metadata */}
       <meta
         itemProp="name"
-        content="Contact TheDevsTechnologies - Website Design & Development Company in Vijayawada"
+        content="Contact TheDevsTechnologies - Website Design Company in Vijayawada"
       />
       <meta
         itemProp="description"
-        content="Get in touch with TheDevsTechnologies in Vijayawada, Andhra Pradesh for website design, web development, ecommerce websites, mobile apps and local SEO services."
+        content="Contact TheDevsTechnologies in Vijayawada, Andhra Pradesh for website design, web development, ecommerce websites, mobile apps and local SEO services."
       />
+
+      {/* Invisible SEO context */}
       <p className="sr-only">
-        Contact TheDevsTechnologies, a website design and development company based in
-        Vijayawada, Andhra Pradesh, India. We build business websites, ecommerce stores,
-        mobile apps and provide local SEO services for clients in Vijayawada, Guntur,
-        Amaravati and across Andhra Pradesh.
+        Contact TheDevsTechnologies, a professional website design and development
+        company in Vijayawada, Andhra Pradesh. We build SEO-friendly business
+        websites, ecommerce stores, mobile apps, and provide local SEO services
+        across Andhra Pradesh.
       </p>
 
       <div className="container mx-auto max-w-7xl">
+        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -99,19 +107,16 @@ ${formData.message}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2
-            id="contact-heading"
-            className="text-4xl md:text-6xl font-bold mb-6"
-          >
+          <h2 id="contact-heading" className="text-4xl md:text-6xl font-bold mb-6">
             Get In <span className="gradient-text">Touch</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Ready to start your project? Let's discuss how we can help bring your vision to life
+            Ready to start your project? Let’s discuss how we can help grow your business online.
           </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* LEFT: Contact info + Why choose us */}
+          {/* LEFT */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -126,18 +131,19 @@ ${formData.message}
             <meta itemProp="areaServed" content="Vijayawada, Andhra Pradesh, India" />
             <meta itemProp="availableLanguage" content="en" />
 
+            {/* Contact Info */}
             <div className="glass-effect rounded-2xl p-8">
               <h3 className="text-2xl font-bold mb-6 gradient-text">
                 Contact Information
               </h3>
-              
+
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white flex items-center justify-center">
                     <Phone className="w-6 h-6" />
                   </div>
                   <div>
-                    <div className="font-semibold text-foreground mb-1">Phone</div>
+                    <div className="font-semibold mb-1">Phone</div>
                     <a
                       href="tel:9381187905"
                       className="text-muted-foreground hover:text-blue-600 transition-colors"
@@ -147,12 +153,13 @@ ${formData.message}
                     </a>
                   </div>
                 </div>
+
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white flex items-center justify-center">
                     <Mail className="w-6 h-6" />
                   </div>
                   <div>
-                    <div className="font-semibold text-foreground mb-1">Email</div>
+                    <div className="font-semibold mb-1">Email</div>
                     <a
                       href="mailto:info@thedevstechnologies.online"
                       className="text-muted-foreground hover:text-blue-600 transition-colors"
@@ -164,15 +171,16 @@ ${formData.message}
                 </div>
               </div>
             </div>
-            
+
+            {/* Why Choose Us */}
             <div className="glass-effect rounded-2xl p-8">
               <h3 className="text-2xl font-bold mb-6 gradient-text">
-                Why Choose Us?
+                Why Choose TheDevsTechnologies?
               </h3>
               <ul className="space-y-4">
                 {whyChooseUs.map((item) => (
-                  <li key={item.text} className="flex items-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                  <li key={item.text} className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-blue-500 mt-1" />
                     <span className="text-muted-foreground font-medium">
                       {item.text}
                     </span>
@@ -182,7 +190,7 @@ ${formData.message}
             </div>
           </motion.div>
 
-          {/* RIGHT: Contact form */}
+          {/* RIGHT: FORM */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -195,86 +203,59 @@ ${formData.message}
               aria-label="Contact form to send your project details via WhatsApp"
             >
               <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-muted-foreground mb-2"
-                >
-                  Full Name *
-                </label>
+                <label className="block text-sm font-medium mb-2">Full Name *</label>
                 <input
                   type="text"
-                  id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-gray-100 border border-gray-200 text-foreground placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                  placeholder="John Doe"
                   required
-                  autoComplete="name"
+                  className="w-full px-4 py-3 rounded-xl bg-gray-100 border focus:ring-2 focus:ring-blue-500"
+                  placeholder="John Doe"
                 />
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-muted-foreground mb-2"
-                >
-                  Email Address *
-                </label>
+                <label className="block text-sm font-medium mb-2">Email *</label>
                 <input
                   type="email"
-                  id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-gray-100 border border-gray-200 text-foreground placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                  placeholder="john@example.com"
                   required
-                  autoComplete="email"
+                  className="w-full px-4 py-3 rounded-xl bg-gray-100 border focus:ring-2 focus:ring-blue-500"
+                  placeholder="john@example.com"
                 />
               </div>
 
               <div>
-                <label
-                  htmlFor="phone"
-                  className="block text-sm font-medium text-muted-foreground mb-2"
-                >
-                  Phone Number
-                </label>
+                <label className="block text-sm font-medium mb-2">Phone</label>
                 <input
                   type="tel"
-                  id="phone"
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-gray-100 border border-gray-200 text-foreground placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                  placeholder="+91 1234567890"
-                  autoComplete="tel"
+                  className="w-full px-4 py-3 rounded-xl bg-gray-100 border focus:ring-2 focus:ring-blue-500"
+                  placeholder="+91 9876543210"
                 />
               </div>
 
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-muted-foreground mb-2"
-                >
-                  Your Message *
-                </label>
+                <label className="block text-sm font-medium mb-2">Message *</label>
                 <textarea
-                  id="message"
                   name="message"
+                  rows={5}
                   value={formData.message}
                   onChange={handleChange}
-                  rows={5}
-                  className="w-full px-4 py-3 rounded-xl bg-gray-100 border border-gray-200 text-foreground placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
-                  placeholder="Tell us about your project..."
                   required
+                  className="w-full px-4 py-3 rounded-xl bg-gray-100 border focus:ring-2 focus:ring-blue-500 resize-none"
+                  placeholder="Tell us about your project..."
                 />
               </div>
 
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-6 text-lg rounded-xl shadow-lg shadow-blue-500/40 transition-all duration-300 hover:scale-105"
+                className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-6 text-lg rounded-xl shadow-lg hover:scale-105 transition-all"
               >
                 Send via WhatsApp
                 <Send className="ml-2 w-5 h-5" />
@@ -283,6 +264,14 @@ ${formData.message}
           </motion.div>
         </div>
       </div>
+
+      {/* 🔥 Hidden SEO hash links */}
+      <nav className="sr-only">
+        <a href="/#/contact">Contact Web Designers in Vijayawada</a>
+        <a href="/#/services">Website Design & Development Services</a>
+        <a href="/#/projects">Web Development Projects</a>
+        <a href="/#/faq">Website Development FAQs</a>
+      </nav>
     </section>
   );
 };

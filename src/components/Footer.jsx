@@ -1,6 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Instagram,
+} from 'lucide-react';
 import ParticleBackground from './ParticleBackground';
 
 const Footer = () => {
@@ -14,7 +22,7 @@ const Footer = () => {
     },
     {
       Icon: Twitter,
-      href: '#', // update when you have a Twitter/X URL
+      href: '#',
       label: 'Visit TheDevsTechnologies on Twitter',
     },
     {
@@ -32,23 +40,27 @@ const Footer = () => {
   return (
     <footer
       className="bg-secondary border-t relative overflow-hidden"
+      role="contentinfo"
       itemScope
       itemType="https://schema.org/Organization"
       aria-labelledby="footer-brand-heading"
     >
-      {/* Hidden SEO context */}
+      {/* SEO metadata */}
       <meta itemProp="name" content="TheDevsTechnologies" />
       <meta
         itemProp="description"
-        content="TheDevsTechnologies is a website design and development company in Vijayawada, Andhra Pradesh, offering web development, mobile apps, UI UX design, ecommerce and digital marketing services."
+        content="TheDevsTechnologies is a website design and development company in Vijayawada, Andhra Pradesh, offering web development, ecommerce, mobile apps, UI UX design and local SEO services."
       />
+      <meta itemProp="url" content="https://thedevstechnologies.online" />
+
+      {/* Invisible SEO context */}
       <p className="sr-only">
-        TheDevsTechnologies is a professional web design and development company
-        based in Vijayawada, Andhra Pradesh, India, helping local and global
-        businesses with websites, mobile apps, ecommerce solutions and digital
-        marketing.
+        TheDevsTechnologies is a professional website design and development company
+        based in Vijayawada, Andhra Pradesh, India, serving businesses across India
+        with SEO-friendly websites, ecommerce stores, mobile apps and digital marketing.
       </p>
 
+      {/* Background effect */}
       <div className="absolute inset-0 z-0 opacity-50">
         <ParticleBackground />
       </div>
@@ -67,6 +79,7 @@ const Footer = () => {
                 src="https://res.cloudinary.com/dtqsqnq4y/image/upload/v1761387612/globe-bg_1_hntiel.png"
                 alt="TheDevsTechnologies Logo"
                 className="w-10 h-10 object-contain"
+                itemProp="logo"
               />
               <h3
                 id="footer-brand-heading"
@@ -76,13 +89,15 @@ const Footer = () => {
                 TheDevsTechnologies
               </h3>
             </div>
+
             <p
               className="text-muted-foreground mb-6 leading-relaxed"
               itemProp="description"
             >
-              Transforming ideas into exceptional digital experiences with cutting-edge
-              technology and creative excellence.
+              Transforming ideas into exceptional digital experiences with
+              cutting-edge technology and creative excellence.
             </p>
+
             <div className="flex gap-3" aria-label="Social media links">
               {socialLinks.map(({ Icon, href, label }) => (
                 <a
@@ -91,7 +106,7 @@ const Footer = () => {
                   target={href === '#' ? undefined : '_blank'}
                   rel={href === '#' ? undefined : 'noopener noreferrer'}
                   aria-label={label}
-                  className="w-10 h-10 rounded-full bg-white border flex items-center justify-center text-muted-foreground hover:bg-blue-500 hover:text-white transition-all duration-300 group"
+                  className="w-10 h-10 rounded-full bg-white border flex items-center justify-center text-muted-foreground hover:bg-blue-500 hover:text-white transition-all duration-300"
                 >
                   <Icon className="w-5 h-5" />
                 </a>
@@ -99,7 +114,7 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          {/* Quick Links */}
+          {/* Quick Links (HashRouter-safe) */}
           <motion.nav
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -107,31 +122,43 @@ const Footer = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             aria-label="Footer quick navigation"
           >
-            <h4 className="text-lg font-bold text-foreground mb-4">Quick Links</h4>
+            <h4 className="text-lg font-bold mb-4">Quick Links</h4>
             <ul className="space-y-3">
-              {['Services', 'Projects', 'Process', 'Testimonials', 'Contact'].map(link => (
-                <li key={link}>
+              {[
+                { name: 'Services', hash: 'services' },
+                { name: 'Projects', hash: 'projects' },
+                { name: 'Process', hash: 'process' },
+                { name: 'Testimonials', hash: 'testimonials' },
+                { name: 'Contact', hash: 'contact' },
+              ].map(link => (
+                <li key={link.name}>
                   <a
-                    href={`#${link.toLowerCase()}`}
+                    href={`/#/${link.hash}`}
                     className="text-muted-foreground hover:text-blue-600 transition-colors"
                   >
-                    {link}
+                    {link.name}
                   </a>
                 </li>
               ))}
             </ul>
           </motion.nav>
 
-          {/* Services list */}
+          {/* Services List */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h4 className="text-lg font-bold text-foreground mb-4">Services</h4>
+            <h4 className="text-lg font-bold mb-4">Services</h4>
             <ul className="space-y-3">
-              {['Web Development', 'Mobile Apps', 'UI/UX Design', 'E-Commerce', 'Digital Marketing'].map(service => (
+              {[
+                'Website Development',
+                'Ecommerce Websites',
+                'UI/UX Design',
+                'Mobile App Development',
+                'Local SEO & Digital Marketing',
+              ].map(service => (
                 <li key={service}>
                   <span className="text-muted-foreground">{service}</span>
                 </li>
@@ -150,10 +177,12 @@ const Footer = () => {
             itemType="https://schema.org/ContactPoint"
           >
             <meta itemProp="contactType" content="Customer Service" />
-            <h4 className="text-lg font-bold text-foreground mb-4">Contact Info</h4>
+            <meta itemProp="areaServed" content="Vijayawada, Andhra Pradesh, India" />
+
+            <h4 className="text-lg font-bold mb-4">Contact Info</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />
+                <Phone className="w-5 h-5 text-blue-600 mt-1" />
                 <a
                   href="tel:9381187905"
                   className="text-muted-foreground hover:text-blue-600 transition-colors"
@@ -162,8 +191,9 @@ const Footer = () => {
                   +91 9381187905
                 </a>
               </li>
+
               <li className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />
+                <Mail className="w-5 h-5 text-blue-600 mt-1" />
                 <a
                   href="mailto:info@thedevstechnologies.online"
                   className="text-muted-foreground hover:text-blue-600 transition-colors break-all"
@@ -172,8 +202,9 @@ const Footer = () => {
                   info@thedevstechnologies.online
                 </a>
               </li>
+
               <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />
+                <MapPin className="w-5 h-5 text-blue-600 mt-1" />
                 <a
                   href="https://thedevstechnologies.online"
                   className="text-muted-foreground hover:text-blue-600 transition-colors"
@@ -186,26 +217,36 @@ const Footer = () => {
           </motion.div>
         </div>
 
+        {/* Bottom Bar */}
         <div className="border-t pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-muted-foreground text-sm text-center md:text-left">
+            <p className="text-muted-foreground text-sm">
               © {currentYear} TheDevsTechnologies. All rights reserved.
             </p>
-            <p className="text-muted-foreground text-center text-sm mt-1">
-              TheDevsTechnologies is a registered MSME under Udyam Registration No.{" "}
-              <strong>UDYAM-AP-06-0106280</strong>.
+
+            <p className="text-muted-foreground text-sm text-center">
+              MSME Registered • UDYAM-AP-06-0106280
             </p>
+
             <div className="flex gap-6 text-sm">
-              <span className="text-muted-foreground hover:text-blue-600 transition-colors cursor-pointer">
+              <span className="text-muted-foreground hover:text-blue-600 cursor-pointer">
                 Privacy Policy
               </span>
-              <span className="text-muted-foreground hover:text-blue-600 transition-colors cursor-pointer">
+              <span className="text-muted-foreground hover:text-blue-600 cursor-pointer">
                 Terms of Service
               </span>
             </div>
           </div>
         </div>
       </div>
+
+      {/* 🔥 Hidden SEO hash links */}
+      <nav className="sr-only">
+        <a href="/#/services">Website Design Services Vijayawada</a>
+        <a href="/#/projects">Web Development Projects</a>
+        <a href="/#/contact">Contact Website Developers in Vijayawada</a>
+        <a href="/#/faq">Website Development FAQs</a>
+      </nav>
     </footer>
   );
 };
