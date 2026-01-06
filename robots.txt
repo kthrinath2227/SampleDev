@@ -1,9 +1,15 @@
 User-agent: *
 Allow: /
 
-# Block staging or private areas (only if they exist)
-# Disallow: /admin/
-# Disallow: /temp/
-# Disallow: /test/
+# Block unnecessary crawl paths
+Disallow: /assets/
+Disallow: /node_modules/
+Disallow: /*.json$
+Disallow: /*.map$
 
+# Allow important files
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+# Sitemap location
 Sitemap: https://thedevstechnologies.online/sitemap.xml
