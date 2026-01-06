@@ -269,27 +269,25 @@ function App() {
             <Hero setActiveSection={setActiveSection} />
             <Services setActiveSection={setActiveSection} />
             {/* ================= ANDHRA PRADESH ================= */}
-<CitySEO city="Vijayawada" nearby={['Guntur', 'Amaravati', 'Tenali', 'Machilipatnam']} />
-<CitySEO city="Visakhapatnam" nearby={['Anakapalle', 'Vizianagaram']} />
-<CitySEO city="Guntur" nearby={['Tenali', 'Chilakaluripet']} />
-<CitySEO city="Tirupati" nearby={['Renigunta', 'Chandragiri']} />
-<CitySEO city="Kakinada" nearby={['Rajahmundry', 'Peddapuram']} />
-<CitySEO city="Rajahmundry" nearby={['Kakinada', 'Kovvur']} />
-<CitySEO city="Nellore" nearby={['Kavali', 'Gudur']} />
-<CitySEO city="Kurnool" nearby={['Nandyal', 'Adoni']} />
-<CitySEO city="Anantapur" nearby={['Hindupur', 'Dharmavaram']} />
+ {/* ========= CITY SEO PAGES ========= */}
+            {/* ANDHRA PRADESH */}
+            <CitySEO city="Vijayawada" nearby={['Guntur', 'Amaravati', 'Tenali']} />
+            <CitySEO city="Visakhapatnam" nearby={['Vizianagaram', 'Anakapalle']} />
+            <CitySEO city="Guntur" nearby={['Tenali', 'Chilakaluripet']} />
+            <CitySEO city="Tirupati" nearby={['Renigunta', 'Chandragiri']} />
+            <CitySEO city="Kurnool" nearby={['Nandyal', 'Adoni']} />
+            <CitySEO city="Anantapur" nearby={['Hindupur', 'Dharmavaram']} />
 
-<CitySEO city="Hyderabad" nearby={['Secunderabad', 'Gachibowli', 'Madhapur']} />
-<CitySEO city="Warangal" nearby={['Hanamkonda', 'Kazipet']} />
-<CitySEO city="Nizamabad" nearby={['Kamareddy']} />
-<CitySEO city="Karimnagar" nearby={['Sircilla']} />
-{/* ================= ODISHA ================= */}
-<CitySEO city="Bhubaneswar" nearby={['Cuttack', 'Khurda']} />
-<CitySEO city="Cuttack" nearby={['Jagatsinghpur']} />
-<CitySEO city="Rourkela" nearby={['Sundargarh']} />
+            {/* TELANGANA */}
+            <CitySEO city="Hyderabad" nearby={['Secunderabad', 'Gachibowli']} />
+            <CitySEO city="Warangal" nearby={['Hanamkonda']} />
 
-{/* ================= PAN INDIA / REMOTE ================= */}
-<CitySEO city="India" nearby={['Online', 'Remote', 'Worldwide']} />
+            {/* PAN INDIA */}
+            <CitySEO city="Bengaluru" nearby={['Whitefield', 'Electronic City']} />
+            <CitySEO city="Mumbai" nearby={['Thane', 'Andheri']} />
+            <CitySEO city="Chennai" nearby={['Tambaram', 'Velachery']} />
+            <CitySEO city="Kolkata" nearby={['Salt Lake', 'Howrah']} />
+            <CitySEO city="Bhubaneswar" nearby={['Cuttack']} />
 
             <Process setActiveSection={setActiveSection} />
             <Projects setActiveSection={setActiveSection} />
